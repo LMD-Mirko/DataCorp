@@ -39,7 +39,44 @@ const Bancos = () => {
     return Object.keys(m).map(k => ({ id: k, label: k, value: m[k] }));
   }, [rows]);
 
-  if (loading) return <div className="p-6">Cargando bancos...</div>;
+  const ageBuckets = useMemo(() => {
+    const buckets = { '<20':0, '20-30':0, '30-40':0, '40-50':0, '50-60':0, '>60':0 };
+    rows.forEach(r => {
+      const age = Number(r.age||0);
+      if (age < 20) buckets['<20']++;
+      else if (age < 30) buckets['20-30']++;
+      else if (age < 40) buckets['30-40']++;
+      else if (age < 50) buckets['40-50']++;
+      else if (age < 60) buckets['50-60']++;
+      else buckets['>60']++;
+    });
+    return Object.keys(buckets).map(k => ({ category: k, count: buckets[k] }));
+  }, [rows]);
+
+  const loanCounts = useMemo(() => {
+    const m = {};
+    rows.forEach(r => { const l = r.loan || 'unknown'; m[l] = (m[l]||0) + 1; });
+    return Object.keys(m).map(k => ({ id: k, label: k, value: m[k] }));
+  }, [rows]);
+
+  const depositsByEducation = useMemo(() => {
+    const educationLevels = [...new Set(rows.map(r => r.education || 'unknown'))];
+    const data = educationLevels.map(edu => ({
+      education: edu,
+      yes: 0,
+      no: 0,
+    }));
+    rows.forEach(r => {
+      const eduLevel = data.find(d => d.education === (r.education || 'unknown'));
+      if (eduLevel) {
+        if (r.deposit === 'yes') eduLevel.yes++;
+        else if (r.deposit === 'no') eduLevel.no++;
+      }
+    });
+    return data;
+  }, [rows]);
+
+  if (loading) return <div className="p-6">Cargando Datos...</div>;
   if (error) return <div className="p-6 text-red-500">Error: {error}</div>;
 
   return (
@@ -54,10 +91,49 @@ const Bancos = () => {
       </div>
 
       <div className="p-4 bg-white/5 rounded shadow">
+        <h3 className="text-lg font-semibold mb-2">Distribución de Edades</h3>
+        <div style={{ height: 420 }}>
+          <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className={cardClass}>
+            <div className="flex-1"><ResponsiveBar theme={nivoTheme} data={ageBuckets} keys={[ 'count' ]} indexBy="category" margin={{ top: 18, right: 18, bottom: 100, left: 96 }} colors={palette} axisLeft={{ legend: 'Clientes', legendPosition: 'middle', legendOffset: -48 }} padding={0.18} /></div>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="p-4 bg-white/5 rounded shadow">
         <h3 className="text-lg font-semibold mb-2">Deposit (sí/no/unknown)</h3>
         <div style={{ height: 340 }}>
           <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className={cardClass}>
             <div className="flex-1"><ResponsivePie theme={nivoTheme} data={depositCounts} innerRadius={0.6} colors={palette} margin={{ top: 8, right: 32, bottom: 8, left: 32 }} padAngle={0.6} cornerRadius={6} enableArcLabels={false} /></div>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="p-4 bg-white/5 rounded shadow">
+        <h3 className="text-lg font-semibold mb-2">Préstamos (sí/no/unknown)</h3>
+        <div style={{ height: 340 }}>
+          <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className={cardClass}>
+            <div className="flex-1"><ResponsivePie theme={nivoTheme} data={loanCounts} innerRadius={0.6} colors={palette} margin={{ top: 8, right: 32, bottom: 8, left: 32 }} padAngle={0.6} cornerRadius={6} enableArcLabels={false} /></div>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="p-4 bg-white/5 rounded shadow md:col-span-2">
+        <h3 className="text-lg font-semibold mb-2">Depósitos por Nivel Educativo</h3>
+        <div style={{ height: 420 }}>
+          <motion.div initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className={cardClass}>
+            <div className="flex-1">
+              <ResponsiveBar 
+                theme={nivoTheme} 
+                data={depositsByEducation} 
+                keys={[ 'yes', 'no' ]} 
+                indexBy="education" 
+                margin={{ top: 18, right: 18, bottom: 100, left: 96 }} 
+                colors={palette} 
+                axisLeft={{ legend: 'Clientes', legendPosition: 'middle', legendOffset: -48 }} 
+                padding={0.18}
+                groupMode="grouped"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
