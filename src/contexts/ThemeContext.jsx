@@ -75,6 +75,39 @@ export const ThemeProvider = ({ children }) => {
     colors: colorOptions[primaryColor],
   };
 
+  // Apply CSS variables for colors so components can adapt to light/dark and primary color
+  useEffect(() => {
+    try {
+      const root = document.documentElement;
+      if (isDarkMode) {
+        root.style.setProperty('--app-bg', '#071226');
+        root.style.setProperty('--panel-bg', 'rgba(2,6,23,0.85)');
+        root.style.setProperty('--card-bg', 'rgba(255,255,255,0.03)');
+        root.style.setProperty('--text-color', '#e6eef6');
+        root.style.setProperty('--muted-color', '#9aa6b2');
+      } else {
+        root.style.setProperty('--app-bg', '#f7fafc');
+        root.style.setProperty('--panel-bg', '#ffffff');
+        root.style.setProperty('--card-bg', '#f8fafc');
+        root.style.setProperty('--text-color', '#0f172a');
+        root.style.setProperty('--muted-color', '#6b7280');
+      }
+
+      const accents = {
+        blue: ['#06b6d4', '#0ea5a4'],
+        red: ['#ef4444', '#dc2626'],
+        green: ['#34d399', '#10b981'],
+        orange: ['#fb923c', '#fb7a0d'],
+        purple: ['#a78bfa', '#8b5cf6'],
+      };
+      const [start, end] = accents[primaryColor] || accents.blue;
+      root.style.setProperty('--accent-start', start);
+      root.style.setProperty('--accent-end', end);
+    } catch (err) {
+      console.error('Failed to apply theme variables', err);
+    }
+  }, [isDarkMode, primaryColor]);
+
   return (
     <ThemeContext.Provider value={theme}>
       {children}
