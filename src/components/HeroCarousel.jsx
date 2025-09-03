@@ -17,7 +17,7 @@ const slides = [
     title: 'Soluciones a Medida para Tu Empresa',
     description: 'Desde análisis de mercado hasta optimización de procesos, DataCorp es tu aliado estratégico en el mundo digital.',
     image: 'https://plus.unsplash.com/premium_photo-1661660074116-320af8370765?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    buttonText: 'Explora Nuestros Productos',
+    buttonText: 'Explora Nuestros Proyectos',
     buttonLink: '/productos'
   },
   {
@@ -26,7 +26,7 @@ const slides = [
   description: 'Convierte grandes volúmenes de información en estrategias claras y efectivas para tu negocio.',
   image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.1.0',
   buttonText: 'Ver Casos de Éxito',
-  buttonLink: '/casos-exito'
+  buttonLink: '/sobre-nosotros'
 },
 {
   id: 4,
@@ -34,7 +34,7 @@ const slides = [
   description: 'Integramos inteligencia artificial y analítica avanzada para llevar tu empresa al siguiente nivel.',
   image: 'https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.1.0',
   buttonText: 'Descubre Nuestra Tecnología',
-  buttonLink: '/tecnologia'
+  buttonLink: '/graficos'
 },
 {
   id: 5,
@@ -42,7 +42,7 @@ const slides = [
   description: 'Trabajamos contigo para diseñar soluciones únicas que respondan a las necesidades reales de tu organización.',
   image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.1.0',
   buttonText: 'Contáctanos',
-  buttonLink: '/contacto'
+  buttonLink: '/datacorpbot'
 }
 ];
 

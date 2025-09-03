@@ -42,7 +42,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white mb-4">Contacto</h3>
             <ul className="space-y-2">
               <li><a href="mailto:info@bookworm.com" className="text-gray-400 hover:transition-colors duration-200" style={{ ':hover': { color: 'var(--color-primary-400)' } }}>info@datacorp.com</a></li>
-              <li><a href="tel:+15551234567" className="text-gray-400 hover:transition-colors duration-200" style={{ ':hover': { color: 'var(--color-primary-400)' } }}>(+51) 906 936 891</a></li>
+              <li><a href="tel:+51906936891" className="text-gray-400 hover:transition-colors duration-200" style={{ ':hover': { color: 'var(--color-primary-400)' } }}>(+51) 906 936 891</a></li>
               <li><span className="text-gray-400">Ca. Sta. Mercedes 251, Lima 15103, Perú</span></li>
             </ul>
           </div>
