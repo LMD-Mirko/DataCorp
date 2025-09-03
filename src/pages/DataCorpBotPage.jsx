@@ -88,7 +88,7 @@ export default function DataCorpBotPage() {
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={{ marginTop: '3rem' }}>
       <div className={styles.container}>
         {/* header */}
         <header className={styles.header}>

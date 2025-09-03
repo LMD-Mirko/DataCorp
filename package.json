@@ -10,19 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nivo/bar": "^0.79.0",
+    "@nivo/core": "^0.79.0",
+    "@nivo/line": "^0.79.0",
+    "@nivo/pie": "^0.79.0",
+    "@nivo/scatterplot": "^0.79.0",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.309.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-  "react-router-dom": "^6.30.1",
-  "@nivo/core": "^0.79.0",
-  "@nivo/bar": "^0.79.0",
-  "@nivo/pie": "^0.79.0",
-  "@nivo/line": "^0.79.0",
-  "@nivo/scatterplot": "^0.79.0"
+    "react-router-dom": "^6.30.1"
   },
   "optionalDependencies": {
-    "react-markdown": "^8.0.6",
+    "react-markdown": "^8.0.7",
     "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
