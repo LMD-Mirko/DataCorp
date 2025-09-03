@@ -21,6 +21,10 @@
   "@nivo/line": "^0.79.0",
   "@nivo/scatterplot": "^0.79.0"
   },
+  "optionalDependencies": {
+    "react-markdown": "^8.0.6",
+    "remark-gfm": "^3.0.1"
+  },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
